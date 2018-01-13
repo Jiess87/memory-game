@@ -1,0 +1,56 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+header, section, footer, div {
+  border: 1px solid red;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+header, section, footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 750px;
+}
+
+/* Board Styling */
+
+.board {
+  width: 750px;
+  height: 750px;
+  border-radius: .7em;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Card Styling */
+
+.card {
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: .7em;
+  margin: 0 auto;
+  background: grey;
+  color: white;
+}
+
+.card.face-up {
+  font-size: 30px;
+  background: cyan;
+}
