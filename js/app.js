@@ -1,4 +1,6 @@
-const cardArray = Array.from(document.getElementsByClassName('card'));
+const cardArray = Array.from(document.querySelectorAll('.card'));
+let rating = document.querySelectorAll('.rate');
+let ratingShadow = document.querySelectorAll('.rate-shadow');
 let moveCount = 0;
 let time = new Date();
 let timeStart = time.getTime();
@@ -22,16 +24,17 @@ Array.prototype.shuffle = function() {
   });
   //Shakes the cards
   clearAnim();
+  clearRating();
   cardArray.forEach(function(obj) {
     obj.className += ' animated wobble';
   });
   moveCount = 0;
   min = 0;
   sec = 0;
+  //Resets timer and move counter
   moveCounter();
   clearInterval(timeId);
   document.querySelector('.chrono').innerHTML = '00:00';
-  return
 }
 
 function startTimer() {
@@ -42,16 +45,14 @@ function startTimer() {
   console.log('start timer');
   clearInterval(timeId);
   timeId = setInterval(timer, 1000);
-
-  return
 }
 
 function timer() {
   curTime = new Date();
   elapsed = curTime.getTime();
-  if (document.querySelectorAll('.animated').length == 16) {
+  /*if (document.querySelectorAll('.animated').length == 16) {
     return;
-  } else if (elapsed > timeStart) {
+  } else */ if (elapsed > timeStart) {
     sec++;
     if (sec == 60) {
       sec = 0;
@@ -76,7 +77,7 @@ function moveCounter() {
   } else {
     document.querySelector('.moves').innerHTML = moveCount + ' moves this round';
   }
-  return
+  ratingCheck();
 }
 
 function turnCard(ele) {
@@ -92,7 +93,6 @@ function cardMatch() {
     faceUp[i].classList.remove('face-up');
   }
   setTimeout(clearAnim, 750);
-  return
 }
 
 function noMatch(ele) {
@@ -103,31 +103,56 @@ function noMatch(ele) {
     faceUp[i].classList.remove('face-up');
   }
   setTimeout(clearAnim, 750);
-  return
 }
 
-function win(ele) {
-  clearAnim();
-  return
+function ratingCheck() {
+  console.log('ratingCheck');
+  clearAnim()
+  if (moveCount >= 12){
+    rating[0].style.color = '#b5b0ba';
+    rating[3].style.color = '#b5b0ba';
+  }
+  if (moveCount >= 18) {
+    rating[1].style.color = '#b5b0ba';
+    rating[4].style.color = '#b5b0ba';
+  }
+  if (moveCount >= 25) {
+    rating[2].style.color = '#b5b0ba';
+    rating[5].style.color = '#b5b0ba';
+  }
 }
+
+function clearRating() {
+  for (i = 0; i < rating.length; i++) {
+    rating[i].style.color = '#849324';
+  }
+}
+
+function win() {
+  clearAnim();
+  document.querySelector('.win-screen').style.display = 'initial';
+  document.querySelector('.win-message').className += ' animated tada';
+  document.querySelector('.time').innerHTML = document.querySelector('.chrono').innerHTML;
+  document.querySelector('.move-count').innerHTML = moveCount;
+  clearInterval(timeId);
+}
+
 // Clears animation classes (manually add all animation classes used to .remove statement)
 function clearAnim() {
   toClear = document.querySelectorAll('.animated');
   for (i = 0; i < toClear.length; i++) {
     toClear[i].classList.remove('animated','wrong', 'wobble', 'bounceIn', 'tada', 'shake');
   }
-  return
 }
 //Event Listeners
   //Reset Button
 document.querySelector('.reset').addEventListener('click', function() {
   cardArray.shuffle();
-  return
 });
   //Play Again Button
 document.querySelector('.again-button').addEventListener('click', function() {
   cardArray.shuffle();
-  return
+  document.querySelector('.win-screen').style.display = 'none';
 });
   //Card listeners
 cardArray.forEach(function(check) {
@@ -135,22 +160,19 @@ cardArray.forEach(function(check) {
     anim = document.querySelectorAll('.animated');
     match = document.querySelectorAll('.match');
     faceUp = document.querySelectorAll('.face-up');
-    if ((anim.length == 16) && (match.length < 16)) {
-      clearAnim();
-      turnCard(check);
-      if (document.querySelector('.chrono').innerHTML == '00:00') {
-        startTimer();
-      }
-    } else if (faceUp.length == 2) {
+    //Blocks action if 2 cards are already shown
+    if (faceUp.length == 2) {
       console.log('ANIMATION');
       return
-    } else if ((faceUp.length == 1) && (check.classList.contains('face-up') == false)) {
+    //If 1 card is already shown, increment move counter, turn the card
+    } else if ((faceUp.length == 1) && ((check.classList.contains('face-up') || check.classList.contains('match')) == false)) {
       moveCount++;
       moveCounter();
       turnCard(check);
       setTimeout(function() {
         faceUp = document.querySelectorAll('.face-up');
         console.log('timeout');
+        //Compare cards for match or no match
         if (faceUp[0].innerHTML == faceUp[1].innerHTML) {
           cardMatch(check);
           console.log('match');
@@ -166,13 +188,13 @@ cardArray.forEach(function(check) {
           console.log('nomatch');
         }
       }, 750);
-    } else if ((check.classList.contains('face-up') || check.classList.contains('match') || (anim.length == 16))  == false) {
+    //If no card is already selected, turn card and start timer if it needs to.
+  } else if ((check.classList.contains('face-up') || check.classList.contains('match'))  == false) {
       turnCard(check);
       if (document.querySelector('.chrono').innerHTML == '00:00') {
         startTimer();
       }
       console.log('solo');
     }
-    return
   });
 });
