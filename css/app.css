@@ -17,16 +17,35 @@ html {
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  padding: 30px;
   font-family: Acme, sans-serif;
 }
 
-header, section, footer {
+header, section {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 700px;
 }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+  padding: 0 10px 0 10px;;
+}
+
+.rating {
+  font-size: 30px;
+  color: gold;
+  margin-top: 10px;
+}
+
+.moves {
+  font-size: 30px;
+  margin-top: 12px;
+}
+
+
 
 /* Board Styling */
 
@@ -34,18 +53,74 @@ header, section, footer {
   font-size: 45px;
   align-self: flex-end;
   margin-left: 10px;
+  width: 115px;
 }
 
-h1 {
+.title {
+  font-size: 45px;
   text-align: center;
   flex: 1;
-  padding-right: 73px;
+  padding-right: 75px;
+  margin-bottom: 10px;
 }
 
 .reset {
   font-size: 45px;
   align-self: flex-end;
   margin-right: 10px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.win-screen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 300px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.win-message {
+  margin: auto;
+  width: 400px;
+  min-height: 250px;
+  border-radius: 1em;
+  background: white;
+  box-shadow: 10px 10px 10px 0 rgba(50, 50, 50, 0.5);
+}
+
+.won {
+  font-size: 45px;
+  text-align: center;
+  padding-top: 10px;
+  margin: 0;
+}
+
+.win-rating {
+  font-size: 30px;
+  color: gold;
+  text-align: center;
+  margin: 0;
+}
+
+.won-message {
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
+
+.again-button {
+  background-color: green;
+  margin: 10px auto;
+  padding: 10px;
+  width: 200px;
+  border-radius: 1em;
+  box-shadow: 5px 5px 5px 0 rgba(50, 50, 50, 0.5);
+  text-align: center;
+  cursor: pointer;
 }
 
 .board {
@@ -76,6 +151,7 @@ h1 {
   color: grey;
   background: grey;
   box-shadow: 10px 10px 10px 0 rgba(50, 50, 50, 0.5);
+  cursor: pointer;
 }
 
 .card.face-up {

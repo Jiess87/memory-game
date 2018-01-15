@@ -124,6 +124,11 @@ document.querySelector('.reset').addEventListener('click', function() {
   cardArray.shuffle();
   return
 });
+  //Play Again Button
+document.querySelector('.again-button').addEventListener('click', function() {
+  cardArray.shuffle();
+  return
+});
   //Card listeners
 cardArray.forEach(function(check) {
   check.addEventListener("click", function() {
