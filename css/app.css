@@ -6,34 +6,59 @@ html {
   box-sizing: inherit;
 }
 
-header, section, footer, div {
+/* header, section, footer, div {
   border: 1px solid red;
 }
+*/
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: Acme, sans-serif;
 }
 
 header, section, footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 750px;
+  width: 700px;
 }
 
 /* Board Styling */
 
+.chrono {
+  font-size: 45px;
+  align-self: flex-end;
+  margin-left: 10px;
+}
+
+h1 {
+  text-align: center;
+  flex: 1;
+  padding-right: 73px;
+}
+
+.reset {
+  font-size: 45px;
+  align-self: flex-end;
+  margin-right: 10px;
+}
+
 .board {
-  width: 750px;
-  height: 750px;
-  border-radius: .7em;
+  width: 700px;
+  height: 700px;
+  padding: 30px 30px 0;
+  border-radius: 1em;
+  background: blue;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
+  box-shadow: 10px 10px 10px 0 rgba(50, 50, 50, 0.5);
 }
 
 /* Card Styling */
@@ -41,16 +66,29 @@ header, section, footer {
 .card {
   display: inline-flex;
   justify-content: center;
-  align-content: center;
-  width: 150px;
-  height: 150px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  width: 140px;
+  height: 140px;
   border-radius: .7em;
-  margin: 0 auto;
+  font-size: 45px;
+  color: grey;
   background: grey;
-  color: white;
+  box-shadow: 10px 10px 10px 0 rgba(50, 50, 50, 0.5);
 }
 
 .card.face-up {
-  font-size: 30px;
   background: cyan;
+  color: white;
+}
+
+.card.wrong {
+  background: red;
+  color: white;
+}
+
+.card.match {
+  background: yellow;
+  color: white;
 }
