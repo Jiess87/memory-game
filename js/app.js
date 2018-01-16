@@ -42,7 +42,6 @@ function startTimer() {
   sec = 0;
   time = new Date();
   timeStart = time.getTime();
-  console.log('start timer');
   clearInterval(timeId);
   timeId = setInterval(timer, 1000);
 }
@@ -106,8 +105,6 @@ function noMatch(ele) {
 }
 
 function ratingCheck() {
-  console.log('ratingCheck');
-  clearAnim()
   if (moveCount >= 12){
     rating[0].style.color = '#b5b0ba';
     rating[3].style.color = '#b5b0ba';
@@ -115,10 +112,6 @@ function ratingCheck() {
   if (moveCount >= 18) {
     rating[1].style.color = '#b5b0ba';
     rating[4].style.color = '#b5b0ba';
-  }
-  if (moveCount >= 25) {
-    rating[2].style.color = '#b5b0ba';
-    rating[5].style.color = '#b5b0ba';
   }
 }
 
@@ -162,7 +155,6 @@ cardArray.forEach(function(check) {
     faceUp = document.querySelectorAll('.face-up');
     //Blocks action if 2 cards are already shown
     if (faceUp.length == 2) {
-      console.log('ANIMATION');
       return
     //If 1 card is already shown, increment move counter, turn the card
     } else if ((faceUp.length == 1) && ((check.classList.contains('face-up') || check.classList.contains('match')) == false)) {
@@ -171,21 +163,17 @@ cardArray.forEach(function(check) {
       turnCard(check);
       setTimeout(function() {
         faceUp = document.querySelectorAll('.face-up');
-        console.log('timeout');
         //Compare cards for match or no match
         if (faceUp[0].innerHTML == faceUp[1].innerHTML) {
           cardMatch(check);
-          console.log('match');
           setTimeout(function() {
             match = document.querySelectorAll('.match');
             if (match.length == 16) {
-              console.log('wincondition')
               win();
             }
           }, 1200);
         } else {
           noMatch(check);
-          console.log('nomatch');
         }
       }, 750);
     //If no card is already selected, turn card and start timer if it needs to.
@@ -194,7 +182,8 @@ cardArray.forEach(function(check) {
       if (document.querySelector('.chrono').innerHTML == '00:00') {
         startTimer();
       }
-      console.log('solo');
     }
   });
 });
+
+cardArray.shuffle();
